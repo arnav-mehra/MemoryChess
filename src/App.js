@@ -199,7 +199,7 @@ const App = () => {
 
     //visual output
     return (
-        <div style={{display:"flex", alignItems:"center", flexDirection:"column", fontWeight:"600"}}>
+        <div style={{display:"flex", flexDirection:"column", fontWeight:"600"}}>
             
 
 
