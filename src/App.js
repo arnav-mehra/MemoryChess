@@ -11,8 +11,8 @@ const pieceIconMap = {
     'r': faChessRook, 'q': faChessQueen, 'k': faChessKing
 };
 const buttonStyle = {
-    border:"8px solid #94e5ff", borderRadius:"15px",
-    fontSize:"30px", padding:"5px 10px", backgroundColor:"white"
+    border:"5px solid #94e5ff", borderRadius:"15px",
+    fontSize:"18px", padding:"3px 6px", backgroundColor:"white"
 }
 const defaultBoard = "rnbqkbnrpppppppp                                PPPPPPPPRNBQKBNR";
 
@@ -132,7 +132,7 @@ const App = () => {
 
 
     //various state controlling and other functions
-    const dimensions = window.innerWidth - 60;
+    const dimensions = window.innerWidth - 50;
     const materialEvalAcc = () => {
         var evaluation = 0
         for (var i=0; i<64; i++) {
@@ -204,10 +204,10 @@ const App = () => {
 
 
             {/* title and score */}
-            <div style={{fontSize:"50px", margin:"30px 0 50px 0"}}>Memory Chess by Arnav Mehra</div>
+            <div style={{fontSize:"30px", margin:"20px 0 30px 0"}}>Memory Chess by Arnav Mehra</div>
             <div style={{
                 display:"flex", justifyContent:"space-between", 
-                fontSize:"40px", fontWeight:"600",
+                fontSize:"20px", fontWeight:"600",
                 marginBottom:"20px", width: dimensions/1.4,
             }}>
                 <div>Current Score: {score + materialEvalAcc()*20}</div>
@@ -217,7 +217,7 @@ const App = () => {
 
 
             {/* black box: board and lower buttons */}
-            <div style={{border:"12px solid black", borderRadius:"25px", background:"black"}}>
+            <div style={{border:"8px solid black", borderRadius:"20px", background:"black"}}>
 
 
 
@@ -240,7 +240,7 @@ const App = () => {
                                                 isBlack? "#94e5ff":
                                                 "white", 
                                             borderRadius: "15px",
-                                            fontSize: selection == sq? "85px" : "75px",
+                                            fontSize: selection == sq? "55px" : "45px",
                                             display:"flex", justifyContent:"center", alignItems:"center"
                                         }}
                                         onClick={() => {handleSelect(sq)}}
@@ -262,11 +262,11 @@ const App = () => {
 
 
                 {/* first row of buttons */}
-                <div style={{marginTop:"20", display:"flex", justifyContent:"space-between", width: dimensions}}>
+                <div style={{marginTop:"10", display:"flex", justifyContent:"space-between", width: dimensions}}>
                     
                     <div style={{display:"flex", fontSize:"30px", alignItems:"center", ...buttonStyle}}>
                         <div>Set Level (1-5):</div>
-                        &nbsp;&nbsp;
+                        &nbsp;
                         <Radio.Group
                             options={[{value: 1},{value: 2},{value: 3},{value: 4},{value: 5}]}
                             onChange={(e) => {
@@ -301,7 +301,7 @@ const App = () => {
 
 
                 {/* second row of buttons */}
-                <div style={{marginTop:"15px", display:"flex", justifyContent:"space-between", width: dimensions}}>
+                <div style={{marginTop:"10px", display:"flex", justifyContent:"space-between", width: dimensions}}>
                     <div
                         style={buttonStyle}
                         onClick={() => {
