@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react'
+
 import Sample from '../Sample.js';
 import SampleWASM from '../Sample.wasm';
+import {rules} from './Rules'
 
-import {Input, Radio} from 'antd';
-
+import {Input, Radio, Modal} from 'antd';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faChessPawn, faChessKnight, faChessBishop, faChessRook, faChessQueen, faChessKing} from '@fortawesome/free-solid-svg-icons'
+import {faChessPawn, faChessKnight, faChessBishop, faChessRook, faChessQueen, faChessKing, faInfoCircle} from '@fortawesome/free-solid-svg-icons'
 const pieceIconMap = {
     'p': faChessPawn, 'n': faChessKnight, 'b': faChessBishop, 
     'r': faChessRook, 'q': faChessQueen, 'k': faChessKing
@@ -28,6 +29,12 @@ const App = () => {
     const [board, setBoard] = useState({boardStr: defaultBoard, turn: true})
 
     //on-going states
+    const [mouse, setMouse] = useState({x: 0, y: 0})
+    const updateMouse = (e) => setMouse({x: e.clientX, y: e.clientY})
+    useEffect(() => {
+        window.addEventListener("mousemove", updateMouse);
+        return () => window.removeEventListener("mousemove", updateMouse);
+    }, [])
     const [playerMoves, setPlayerMoves] = useState("")
     const [selection, setSelection] = useState(-1)
     const [checkedSq, setCheckedSq] = useState(-1)
@@ -40,6 +47,7 @@ const App = () => {
     useEffect(() => {
         sample.then((core) => {core.setLevel(level)})
     }, [level])
+    const [infoVisibility, setInfoVisibility] = useState(false)
 
 
 
@@ -131,9 +139,10 @@ const App = () => {
 
     //various other functions and variables
     const dimensions = 315 - 15;
+    const mouseSize = 20;
     const buttonStyle = {
         border:"5px solid #94e5ff", borderRadius:"5px",
-        fontSize:"14px", padding:"3px 10px", backgroundColor:"white"
+        fontSize:"14px", padding:"2px 10px", backgroundColor:"white"
     }
     const buttonLineStyle = {
         marginTop:"5px", width: dimensions,
@@ -205,29 +214,97 @@ const App = () => {
 
     //visual output
     return (
-        <div style={{display:"flex", flexDirection:"column", alignItems:"center", fontWeight:"600", width:dimensions+10, paddingBottom:"10px"}}>
+        <>
+
+        {/* mouse */}
+        <div style={{
+            zIndex: "3", position: "absolute", pointerEvents: "none",
+            top: mouse.y - mouseSize/2, left: mouse.x - mouseSize/2
+        }}>
+            <div style={{
+                width: mouseSize, height: mouseSize, 
+                background:"gray", opacity: .4, borderRadius: mouseSize/2
+            }}></div>
+        </div>
+
+
+
+        {/* information modal */}
+        {infoVisibility &&
+            <div style={{
+                zIndex: "2", position: "absolute", marginTop:"50px", width: dimensions+10,
+                display:"flex", justifyContent:"center"
+            }}>
+                <div style={{
+                    borderRadius:"10px", border:"2px solid gray", backgroundColor:"white",
+                    width:"260px", height:"330px",  padding:"5px"
+                }}>
+
+                    <div style={{
+                        display:"flex", justifyContent:"space-between",
+                        fontSize:"20px"
+                    }}>
+                        <div>Game Rules</div>
+                        <div
+                            onClick={() => {setInfoVisibility(false)}}
+                            style={{transform:"scale(1.2,1)", marginRight:"5px"}}
+                        >X</div>
+                    </div>
+
+                    <div style={{width:"100%", height:"1px", backgroundColor:"gray", margin:"5 0 10 0"}}></div>
+                    
+                    {rules.map((item) => 
+                        <div style={{margin:"5px"}}>
+                            <div>{item.text}</div>
+                            {item.points.map((sub) => 
+                                <div style={{marginLeft:"20px", fontSize:"14px"}}>{sub}</div>
+                            )}
+                        </div>
+                    )}
+                    
+                </div>
+            </div>
+        }
+
+
+
+        
+        <div style={{
+            display:"flex", flexDirection:"column", alignItems:"center", 
+            fontWeight:"600", width:dimensions+10, paddingBottom:"10px",
+            pointerEvents: infoVisibility? "none" : "all",
+            filter: infoVisibility? "blur(2px)" : "blur(0px)"
+        }}>
             
 
 
             {/* title */}
-            <div style={{fontSize:"24px", margin:"5px 0 10px"}}>Memory Chess</div>
+            <div style={{fontSize:"22px", margin:"0 0 5px", textAlign:"center"}}>Memory Chess</div>
             
-             
-
+            
 
             {/* black box: board and lower buttons */}
-            <div style={{border:"5px solid black", borderRadius:"10px", background:"black", display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column"}}>
+            <div style={{
+                border:"5px solid black", borderRadius:"10px", background:"black", 
+                display:"flex", alignItems:"center", justifyContent:"center", 
+                flexDirection:"column"
+            }}>
 
 
 
                 {/* score */}
                 <div style={{
-                    display:"flex", justifyContent:"space-around", 
+                    display:"flex", justifyContent:"space-between", alignItems:"center", 
                     fontSize:"16px", color:"white",
-                    margin:"2px 0 5px 0", width:"100%"
+                    margin:"0px 0 4px 0", width:"calc(100% - 4px)"
                 }}>
                     <div>Score: {score + materialEvalAcc()*20}</div>
                     <div>High Score: {localStorage.getItem('highScore')}</div>
+                    <FontAwesomeIcon
+                        icon={faInfoCircle}
+                        style={{float:"right", fontSize:"16px"}}
+                        onClick={() => {setInfoVisibility(true)}}
+                    />
                 </div>
 
 
@@ -329,6 +406,7 @@ const App = () => {
             </div>
             
         </div>
+        </>
     )
 }
 
