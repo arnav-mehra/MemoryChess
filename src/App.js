@@ -112,11 +112,13 @@ const App = () => {
 
         sample.then((core) => {
             if (pturn != true) {
+                var newBoard = core.playEngMove(true, defaultBoard)
                 setBoard({
                     ...board,
-                    boardStr: core.playEngMove(true, defaultBoard),
+                    boardStr: newBoard,
                     turn: false
                 });
+                setPlayerMoves(core.getLegals(false, newBoard));
             } else {
                 setPlayerMoves(core.getLegals(true, defaultBoard));
                 setBoard({boardStr: defaultBoard, turn: true})
@@ -203,11 +205,11 @@ const App = () => {
 
     //visual output
     return (
-        <div style={{display:"flex", flexDirection:"column", alignItems:"center", fontWeight:"600", width:dimensions+10}}>
+        <div style={{display:"flex", flexDirection:"column", alignItems:"center", fontWeight:"600", width:dimensions+10, paddingBottom:"10px"}}>
             
 
 
-            {/* title and score */}
+            {/* title */}
             <div style={{fontSize:"24px", margin:"5px 0 10px"}}>Memory Chess</div>
             
              
@@ -216,14 +218,19 @@ const App = () => {
             {/* black box: board and lower buttons */}
             <div style={{border:"5px solid black", borderRadius:"10px", background:"black", display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column"}}>
 
+
+
+                {/* score */}
                 <div style={{
                     display:"flex", justifyContent:"space-around", 
-                    fontSize:"15px", color:"white",
+                    fontSize:"16px", color:"white",
                     margin:"2px 0 5px 0", width:"100%"
                 }}>
-                    <div>Current Score: {score + materialEvalAcc()*20}</div>
+                    <div>Score: {score + materialEvalAcc()*20}</div>
                     <div>High Score: {localStorage.getItem('highScore')}</div>
                 </div>
+
+
 
                 {/* board */}
                 <div style={{width: dimensions + "px", height: dimensions + "px", background:"white", borderRadius:"15px"}}>
@@ -244,7 +251,7 @@ const App = () => {
                                                 isBlack? "#94e5ff":
                                                 "white", 
                                             borderRadius: "5px",
-                                            fontSize: selection == sq? "35px" : "25px",
+                                            fontSize: selection == sq? "30px" : "25px",
                                             display:"flex", justifyContent:"center", alignItems:"center"
                                         }}
                                         onClick={() => {handleSelect(sq)}}
