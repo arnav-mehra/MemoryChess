@@ -1,6 +1,6 @@
 export const rules = [
     {
-        text: "1. Players start with 0 points and objective is to maximize the score.",
+        text: "1. The objective of this game is to maximize your score.",
         points: []
     },
     {

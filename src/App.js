@@ -232,12 +232,12 @@ const App = () => {
         {/* information modal */}
         {infoVisibility &&
             <div style={{
-                zIndex: "2", position: "absolute", marginTop:"50px", width: dimensions+10,
+                zIndex: "2", position: "absolute", marginTop:"40px", width: dimensions+10,
                 display:"flex", justifyContent:"center"
             }}>
                 <div style={{
-                    borderRadius:"10px", border:"2px solid gray", backgroundColor:"white",
-                    width:"260px", height:"330px",  padding:"5px"
+                    borderRadius:"10px", border:"5px solid #444444", backgroundColor:"white",
+                    width:"260px", height:"340px",  padding:"5px"
                 }}>
 
                     <div style={{
@@ -353,10 +353,9 @@ const App = () => {
                 <div style={buttonLineStyle}>
                     
                     <div style={{display:"flex", alignItems:"center", ...buttonStyle}}>
-                        <div>Set Level (1-5):</div>
+                        <div>Set Level:</div>
                         &nbsp;
                         <Radio.Group
-                            options={[{value: 1},{value: 2},{value: 3},{value: 4},{value: 5}]}
                             onChange={(e) => {
                                 setLevel(e.target.value)
                             }}
