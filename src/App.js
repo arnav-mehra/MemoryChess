@@ -12,7 +12,7 @@ const pieceIconMap = {
 };
 const buttonStyle = {
     border:"5px solid #94e5ff", borderRadius:"15px",
-    fontSize:"18px", padding:"3px 6px", backgroundColor:"white"
+    fontSize:"14px", padding:"3px 6px", backgroundColor:"white"
 }
 const defaultBoard = "rnbqkbnrpppppppp                                PPPPPPPPRNBQKBNR";
 
@@ -132,7 +132,7 @@ const App = () => {
 
 
     //various state controlling and other functions
-    const dimensions = 320 - 20;
+    const dimensions = 310 - 20;
     const materialEvalAcc = () => {
         var evaluation = 0
         for (var i=0; i<64; i++) {
@@ -204,10 +204,10 @@ const App = () => {
 
 
             {/* title and score */}
-            <div style={{fontSize:"26px", margin:"10px 0 15px"}}>Memory Chess by Arnav Mehra</div>
+            <div style={{fontSize:"20px", margin:"10px 0 15px"}}>Memory Chess by Arnav Mehra</div>
             <div style={{
                 display:"flex", justifyContent:"space-between", 
-                fontSize:"20px", fontWeight:"600",
+                fontSize:"16px", fontWeight:"600",
                 marginBottom:"10px", width: dimensions/1.4,
             }}>
                 <div>Current Score: {score + materialEvalAcc()*20}</div>
@@ -240,7 +240,7 @@ const App = () => {
                                                 isBlack? "#94e5ff":
                                                 "white", 
                                             borderRadius: "15px",
-                                            fontSize: selection == sq? "55px" : "45px",
+                                            fontSize: selection == sq? "35px" : "25px",
                                             display:"flex", justifyContent:"center", alignItems:"center"
                                         }}
                                         onClick={() => {handleSelect(sq)}}
@@ -264,7 +264,7 @@ const App = () => {
                 {/* first row of buttons */}
                 <div style={{marginTop:"10", display:"flex", justifyContent:"space-between", width: dimensions}}>
                     
-                    <div style={{display:"flex", fontSize:"30px", alignItems:"center", ...buttonStyle}}>
+                    <div style={{display:"flex", alignItems:"center", ...buttonStyle}}>
                         <div>Set Level (1-5):</div>
                         &nbsp;
                         <Radio.Group
@@ -287,7 +287,7 @@ const App = () => {
                                 playFirstTurn(true)
                             }}
                         >Reset W/ White</div>
-                        &nbsp;&nbsp;
+                        &nbsp;
                         <div
                             style={buttonStyle}
                             onClick={() => {
