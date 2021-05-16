@@ -132,7 +132,7 @@ const App = () => {
 
 
     //various state controlling and other functions
-    const dimensions = window.innerWidth - 50;
+    const dimensions = 320 - 20;
     const materialEvalAcc = () => {
         var evaluation = 0
         for (var i=0; i<64; i++) {
@@ -199,16 +199,16 @@ const App = () => {
 
     //visual output
     return (
-        <div style={{display:"flex", alignItems:"center", flexDirection:"column", fontWeight:"600"}}>
+        <div style={{display:"flex", flexDirection:"column", fontWeight:"600", width:dimensions+10}}>
             
 
 
             {/* title and score */}
-            <div style={{fontSize:"30px", margin:"20px 0 30px 0"}}>Memory Chess by Arnav Mehra</div>
+            <div style={{fontSize:"26px", margin:"10px 0 15px"}}>Memory Chess by Arnav Mehra</div>
             <div style={{
                 display:"flex", justifyContent:"space-between", 
                 fontSize:"20px", fontWeight:"600",
-                marginBottom:"20px", width: dimensions/1.4,
+                marginBottom:"10px", width: dimensions/1.4,
             }}>
                 <div>Current Score: {score + materialEvalAcc()*20}</div>
                 <div>High Score: {localStorage.getItem('highScore')}</div>
@@ -217,7 +217,7 @@ const App = () => {
 
 
             {/* black box: board and lower buttons */}
-            <div style={{border:"8px solid black", borderRadius:"20px", background:"black"}}>
+            <div style={{border:"5px solid black", borderRadius:"20px", background:"black", display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column"}}>
 
 
 
