@@ -7,7 +7,7 @@ export const rules = [
         text: "2. Points are awared for:",
         points: [
             "A. Playing moves without seeing the pieces (ranges from +12 to +20 depending on level).",
-            "B. Material advantages (standard piece value times +10).",
+            "B. Material advantages (standard piece value times +20).",
             "C. Winning the game (+100)."
         ]
     }, 
@@ -15,7 +15,8 @@ export const rules = [
         text: "3. Points are deducted for:",
         points: [
             "A. Playing moves with the pieces visible (-10).",
-            "B. Material deficits (standard piece value times -10)."
+            "B. Material deficits (standard piece value times -20).",
+            "C. Trying to play an illegal move (-5)."
         ]
     },
     {

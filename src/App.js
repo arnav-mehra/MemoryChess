@@ -170,6 +170,8 @@ const App = () => {
         const isLegal = (playerMoves.indexOf(`${from}${to}`) != -1)
         if (isLegal) {
             setCheckedSq(-1);
+        } else {
+            setScore(score - 5);
         }
         return isLegal
     }
@@ -237,7 +239,7 @@ const App = () => {
             }}>
                 <div style={{
                     borderRadius:"10px", border:"5px solid #444444", backgroundColor:"white",
-                    width:"260px", height:"340px",  padding:"5px"
+                    width:"260px", height:"350px",  padding:"5px"
                 }}>
 
                     <div style={{
