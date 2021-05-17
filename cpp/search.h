@@ -45,7 +45,7 @@ class Search {
         Move abNegaMaxCall(uint8_t depth) {
             
             nodes = 0;
-            int16_t alpha = -10000, beta = 10000;
+            int16_t alpha = -100000, beta = 100000;
             int8_t alphaIndex = -1;
             
             vector<Move> moves = legalMoveGen();

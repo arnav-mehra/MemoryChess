@@ -74,7 +74,7 @@ string getLegalMoves(bool turn, string boardChar) {
 
     string moves;
     for (int i=0; i<legalMoves.size(); i++) {
-        moves += to_string(legalMoves[i].fromSq) + to_string(legalMoves[i].toSq) + " ";
+        moves += to_string(legalMoves[i].fromSq+10) + to_string(legalMoves[i].toSq+10) + " ";
     }
     return moves;
 }

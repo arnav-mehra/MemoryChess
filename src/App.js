@@ -167,7 +167,7 @@ const App = () => {
         return evaluation
     }
     const testSelection = (from, to) => {
-        const isLegal = (playerMoves.indexOf(`${from}${to}`) != -1)
+        const isLegal = (playerMoves.indexOf(`${from+10}${to+10}`) != -1)
         if (isLegal) {
             setCheckedSq(-1);
         } else {

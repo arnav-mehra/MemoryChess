@@ -283,7 +283,10 @@ bool Board::isCheck (uint8_t currSquare) {
     uint64_t knightAttackers = (turn? getn() : getN()) & knightMoves[currSquare];
     if (knightAttackers != 0) { return true; }
     uint64_t pawnAttackers = (turn? getp() : getP()) & getPawnAttacks(turn, currSquare);
-    return pawnAttackers != 0;
+    if (pawnAttackers != 0) { return true; }
+
+    uint64_t kingAttackers = (turn? getk() : getK()) & kingMoves[currSquare];
+    return (kingAttackers != 0);
 }
 bool Board::isCheck () {
     uint8_t currSquare = lsb(turn? getK() : getk());
@@ -297,5 +300,8 @@ bool Board::isCheck () {
     uint64_t knightAttackers = (turn? getn() : getN()) & knightMoves[currSquare];
     if (knightAttackers != 0) { return true;}
     uint64_t pawnAttackers = (turn? getp() : getP()) & getPawnAttacks(turn, currSquare);
-    return pawnAttackers != 0;
+    if (pawnAttackers != 0) { return true; }
+
+    uint64_t kingAttackers = (turn? getk() : getK()) & kingMoves[currSquare];
+    return (kingAttackers != 0);
 }

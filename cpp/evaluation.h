@@ -33,7 +33,7 @@ int16_t Board::evaluate() {
     addEvals(5, lsb(getK())); addEvals(11, lsb(getk()));
 
     if (gamePhase > 24) { gamePhase = 24; }
-    return (turn? 1: -1) * (midEval * gamePhase + endEval * (24 - gamePhase))/24 + (rand() % randomness);
+    return (turn? 1: -1) * (midEval * gamePhase + endEval * (24 - gamePhase))/24 + (randomness? rand() % randomness : 0);
 }
 
 
