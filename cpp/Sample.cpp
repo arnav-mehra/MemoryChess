@@ -112,6 +112,6 @@ bool isCheck() {
 
 
 void setRandomness(int level) {
-    b.randomness = (5-level)*50;
+    b.randomness = (5-level)*30;
     depth = level;
 }

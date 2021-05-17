@@ -110,7 +110,8 @@ const App = () => {
         }
     }
     const playFirstTurn = (pturn) => {
-
+        setCheckedSq(-1)
+        setSelection(-1)
         setPlayerTurn(pturn)
         setFlipped(!pturn)
         if (score > Number(localStorage.getItem('highScore'))) {
@@ -239,7 +240,7 @@ const App = () => {
             }}>
                 <div style={{
                     borderRadius:"10px", border:"5px solid #444444", backgroundColor:"white",
-                    width:"260px", height:"350px",  padding:"5px"
+                    width:"260px", height:"365px",  padding:"5px"
                 }}>
 
                     <div style={{

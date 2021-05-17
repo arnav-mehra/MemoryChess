@@ -16,7 +16,8 @@ export const rules = [
         points: [
             "A. Playing moves with the pieces visible (-10).",
             "B. Material deficits (standard piece value times -20).",
-            "C. Trying to play an illegal move (-5)."
+            "C. Trying to play an illegal move (-5).",
+            "D. Clicking to view pieces."
         ]
     },
     {
